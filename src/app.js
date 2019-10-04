@@ -40,9 +40,7 @@ app.use(express.static(join(__dirname, 'public')));
 app.use('/auth', authRoute);
 app.use('/scores', scoresRoute);
 app.use('/parties', partiesRoute);
-// app.use('/main', mainRoute);
 app.use('/', mainRoute);
-// app.use('/', async (req, res) => res.redirect('/main'));
 app.use(errorHandler);
 
 /* Start application */

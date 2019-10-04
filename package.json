@@ -21,10 +21,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.3"
   },
-  "devDependencies": {
-    "eslint": "^4.7.2",
-    "eslint-config-airbnb": "^16.1.0"
-  },
+  "devDependencies": {},
   "author": "Markus Tarn",
   "license": "MIT"
 }
