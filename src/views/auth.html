@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>October Challenge</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<style>
+		.center {
+			width: 400px;
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.center button {
+			width: 150px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row center">
+			<div class="col s12">
+				<div class="row">
+					<div class="input-field col s12">
+						<i class="material-icons prefix">account_circle</i>
+						<input id="name" name="name" type="text" class="validate">
+						<label for="name">User</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<i class="material-icons prefix">lock</i>
+						<input id="password" name="password" type="password" class="validate">
+						<label for="password">Password</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<button class="btn waves-effect waves-light" type="submit" value="auth" onclick="authenticate('auth')" name="action">Log
+							in</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<button class="btn-flat waves-effect waves-light" value="new" onclick="authenticate('new')" 
+							name="action">Register</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+	const autorun = async () => {
+		M.AutoInit();
+		getId('password').addEventListener('keydown', (e) => {
+			if (e.keyCode === 13) authenticate('auth');
+		});
+	}
+	if (document.addEventListener) document.addEventListener('DOMContentLoaded', autorun, false);
+	else if (document.attachEvent) document.attachEvent('onreadystatechange', autorun);
+	else window.onload = autorun;
+</script>
+
+</html>
