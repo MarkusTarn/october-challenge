@@ -5,6 +5,8 @@
   "main": "src/app.js",
   "scripts": {
     "start": "node ./src/app.js",
+    "watch": "npm run watch:dev",
+    "watch:dev": "pm2 start $npm_package_main --name $npm_package_name --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "directories": {
@@ -19,7 +21,8 @@
     "express-es6-template-engine": "^2.1.9",
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.7.3"
+    "mongoose": "^5.7.3",
+    "pm2": "^3.5.1"
   },
   "devDependencies": {},
   "author": "Markus Tarn",
