@@ -1,6 +1,4 @@
-const { User } = require('../models/usersModel');
-
-const scoreMap = {
+const itemMap = {
 	Beer: 1,
 	Wine: 1,
 	Coctail: 1,
@@ -18,37 +16,9 @@ const scoreMap = {
 	Pills: 3       // per pill, various
 };
 
-const reducer = (accumulator, currentValue) => accumulator + currentValue;
-const mapper = (array) => array.map(score => scoreMap[score.item] * score.quantity);
-
-
-
-async function getScoreMap() {
-	return Object.keys(scoreMap);
-}
-
-async function getUserScoreTotal(name) {
-	let user = await User.findOne({ name });
-
-	return user.scores.length ? mapper(user.scores).reduce(reducer) : 0;
-}
-
-async function getUserScores(name) {
-	let user = await User.findOne({ name });
-
-	return user.scores.reverse();
-}
-
-async function addScoreForUser(name, score) {
-	let user = await User.findOne({ name });
-
-	user.scores.push(score);
-	user.save();
-}
+const itemList = Object.keys(itemMap);
 
 module.exports = {
-	getScoreMap,
-	getUserScoreTotal,
-	getUserScores,
-	addScoreForUser,
+	itemMap,
+	itemList,
 };

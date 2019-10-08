@@ -6,22 +6,15 @@ async function getAllParties() {
     return parties;
 }
 
-async function getUserParties(name) {
-	let user = await User.findOne({ name });
+async function getParty(partyName) {
+    const members = {};
+    let users = await User.find({ parties: partyName })
+    users.forEach(member => { members[member.name] = member.scoreTotal });
 
-	return user.parties;
+    return members;
 }
-
-async function addPartyToUser(name, party) {
-	let user = await User.findOne({ name });
-
-	user.parties.push(party);
-	user.save();
-}
-
 
 module.exports = {
     getAllParties,
-    getUserParties,
-    addPartyToUser,
+    getParty,
 }

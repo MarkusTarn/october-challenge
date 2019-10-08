@@ -2,7 +2,10 @@ const config = require('config');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const mongoose = require('mongoose');
+const { itemMap } = require('../models/scoresModel');
 
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
+const mapper = (array) => array.map(score => itemMap[score.item] * score.quantity);
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -23,6 +26,11 @@ const UserSchema = new mongoose.Schema({
     type: Array,
     required: false,
   },
+  scoreTotal: {
+    type: Number,
+    required: true,
+    default: 0
+  },
   parties: {
     type: Array,
     required: false,
@@ -30,9 +38,24 @@ const UserSchema = new mongoose.Schema({
   isAdmin: Boolean
 });
 
-UserSchema.methods.generateAuthToken = function() { 
+UserSchema.methods.generateAuthToken = async function() { 
   const token = jwt.sign({ _id: this._id, name: this.name, isAdmin: this.isAdmin }, config.get('myprivatekey'));
   return token;
+}
+
+UserSchema.methods.calculateScoreTotal = async function() {
+  this.scoreTotal = this.scores.length ? mapper(this.scores).reduce(reducer) : 0;
+  await this.save();
+}
+UserSchema.methods.addScore = async function(score) {
+  this.scores.unshift(score);
+  await this.calculateScoreTotal();
+  await this.save();
+}
+
+UserSchema.methods.addParty = async function(party) {
+  this.parties.push(party);
+  await this.save();
 }
 
 const User = mongoose.model('User', UserSchema);
@@ -46,5 +69,10 @@ function validateUser(user) {
   return Joi.validate(user, schema);
 }
 
+async function getUser(id) {
+  return User.findById({_id: id})
+}
+
 exports.User = User; 
 exports.validate = validateUser;
+exports.getUser = getUser;

@@ -19,12 +19,13 @@ router.post('/', async (req, res, next) => {
   let user = await User.findOne({ name });
 
   if (action === 'auth') {
-    // Authenticate
+    /* Authenticate */
     if (!user) return next(new ValidationError(name, 'User not registered'));
     const authenticated = await bcrypt.compare(password, user.password)
     if (!authenticated) return next(new ValidationError({}, 'Wrong password'));
   } else if (action === 'new') {
-    // Register new
+    /* Register new */
+    if (!name, !password) return next(new ValidationError(name, 'Please fill username and password'));
     if (user) return next(new ValidationError(name, 'User already registered'));
     user = new User({ name, password });
     user.password = await bcrypt.hash(password, 10);
@@ -33,7 +34,7 @@ router.post('/', async (req, res, next) => {
     return next(new SystemError());
   }
 
-  const token = user.generateAuthToken();
+  const token = await user.generateAuthToken();
   res.cookie('authorization', token, { maxAge: 900000, httpOnly: true }).status(200).json({ status: 200, message: 'success' });
 });
 

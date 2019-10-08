@@ -1,31 +1,21 @@
 const auth = require('../middleware/auth');
-const scoresModel = require('../models/scoresModel');
-const partiesModel = require('../models/partiesModel');
+const { getUser } = require('../models/usersModel');
+const { itemList } = require('../models/scoresModel');
 const express = require('express');
 const router = express.Router();
 
 
 router.get('/', auth, async (req, res) => {
-    const { name } = req.user
-    const scores = await scoresModel.getUserScores(name);
-    const scoreTotal = await scoresModel.getUserScoreTotal(name);
-    const scoreMap = await scoresModel.getScoreMap();
-    const parties = await partiesModel.getUserParties(name);
-    console.log(parties);
-    
-
-    console.log(scoreTotal);
-    
+    const User = await getUser(req.user._id);
     res.render('main', {
         locals: {
-            name,
-            scoreTotal,
-            scores,
-            scoreMap,
-            parties
+            name: User.name,
+            scoreTotal: User.scoreTotal,
+            scores: User.scores,
+            itemList,
+            parties: User.parties
         }
     })
 });
 
 module.exports = router;
-// <!-- ${parties.map(party => `<div id="${party}" class="col s12">Siia tuleb ${party} scoreboard</div>`).join('')} -->

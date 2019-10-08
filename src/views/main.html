@@ -21,7 +21,7 @@
 		<div class="nav-content">
 			<ul class="tabs tabs-transparent">
 				<li class="tab"><a class="active" href="#account">Sinu punktid</a></li>
-				${parties.map(party => `<li class="tab"><a href="#${party}">${party}</a></li>`).join('')}
+				${parties.map(party => `<li class="tab"><a href="#${party.trim()}">${party}</a></li>`).join('')}
 				<li class="tab"><a href="#addParty">Lisa tabel</a></li>
 			</ul>
 		</div>
@@ -39,7 +39,7 @@
 			<div class="row">
 				<div class="input-field col s4">
 					<select id="item">
-						${scoreMap.map(item => `<option value="${item}">${item}</option>`).join('')}
+						${itemList.map(item => `<option value="${item}">${item}</option>`).join('')}
 					</select>
 					<label>Vali oma saavutus</label>
 				</div>
