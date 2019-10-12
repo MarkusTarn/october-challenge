@@ -9,14 +9,15 @@ const handleErrors = async (data) => {
 const authenticate = async (action) => {
     const name = getId('name').value;
     const password = getId('password').value;
+    const url = (action === 'auth') ? '/auth/login' : '/auth/register'; 
 
     const options = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, password, action })
+        body: JSON.stringify({ name, password })
     };
 
-    fetch('/auth', options)
+    fetch(url, options)
     .then(json)
     .then(response => {
         if (response.status === 200) window.location.href = '/';
@@ -24,23 +25,6 @@ const authenticate = async (action) => {
     });
 }
 
-// const getScores = async () => {
-//     const item = getId('item').value;
-//     const quantity = getId('quantity').value;
-
-//     const options = {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({ item, quantity })
-//     };
-
-//     fetch('/scores')
-//     .then(json)
-//     .then(response => {
-//         if (response.status === 200) window.location.href = '/';
-//         else alert(response.message);
-//     });
-// }
 
 const postScore = async () => {
     const item = getId('item').value;
@@ -61,12 +45,13 @@ const postScore = async () => {
 }
 
 const addParty = async () => {
-    const party = getId('newPartyName').value;
+    const partyName = getId('newPartyName').value;
+    const password = getId('newPartyPassword').value;
 
     const options = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ party })
+        body: JSON.stringify({ partyName, password })
     };
 
     fetch('/parties', options)
@@ -85,6 +70,7 @@ const getPartyList = async () => {
         else alert(response.message);
     });
 }
+
 // async function deleteScore(id) {
 // 	fetch('/scores' + id, { method: 'DELETE' })
 // 		.then(document.getElementById(id).parentNode.removeChild(document.getElementById(id)))
@@ -112,5 +98,4 @@ function touchend() {
 
 onlongtouch = function(id) { 
     alert(id)
-	// document.getElementById('ping').innerText+='ping\n'; 
 };

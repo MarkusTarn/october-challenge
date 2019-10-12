@@ -2,10 +2,11 @@ const config = require('config');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const mongoose = require('mongoose');
-const { itemMap } = require('../models/scoresModel');
+const { itemMap } = require('./ScoresModel');
 
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 const mapper = (array) => array.map(score => itemMap[score.item] * score.quantity);
+const scorePredicate = (a, b) => (b.scoreTotal > a.scoreTotal ? 1 : (b.scoreTotal > a.scoreTotal ? -1 : 0));
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -20,7 +21,6 @@ const UserSchema = new mongoose.Schema({
     required: true,
     minlength: 3,
     maxlength: 255,
-    unique: true,
   },
   scores: {
     type: Array,
@@ -53,7 +53,7 @@ UserSchema.methods.addScore = async function(score) {
   await this.save();
 }
 
-UserSchema.methods.addParty = async function(party) {
+UserSchema.methods.joinParty = async function(party) {
   this.parties.push(party);
   await this.save();
 }
@@ -76,3 +76,4 @@ async function getUser(id) {
 exports.User = User; 
 exports.validate = validateUser;
 exports.getUser = getUser;
+exports.scorePredicate = scorePredicate;

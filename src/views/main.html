@@ -21,7 +21,8 @@
 		<div class="nav-content">
 			<ul class="tabs tabs-transparent">
 				<li class="tab"><a class="active" href="#account">Sinu punktid</a></li>
-				${parties.map(party => `<li class="tab"><a href="#${party.trim()}">${party}</a></li>`).join('')}
+				${userParties.map(party => `<li class="tab"><a href="#${party.id}">${party.partyName}</a></li>
+				`).join('')}
 				<li class="tab"><a href="#addParty">Lisa tabel</a></li>
 			</ul>
 		</div>
@@ -71,7 +72,7 @@
 					`).join('')}
 				</ul>
 			</div>
-			
+
 		</div>
 	</div>
 
@@ -82,12 +83,16 @@
 			<div class="row">
 				<div class="col s12">
 					<div class="row">
-						<div class="input-field col s8">
+						<div class="input-field col s5">
 							<i class="material-icons prefix">search</i>
-							<input type="text" id="newPartyName" class="autocomplete">
-							<label for="autocomplete-input">Tabeli nimi</label>
+							<input type="text" id="newPartyName" class="autocomplete" name="newPartyName">
+							<label for="newPartyName">Tabeli nimi</label>
 						</div>
 						<div class="input-field col s4">
+							<input type="text" id="newPartyPassword" name="newPartyPassword">
+							<label for="newPartyPassword">Kood</label>
+						</div>
+						<div class="input-field col s3 m2">
 							<a href="#!" class="waves-effect waves-green btn" onclick="addParty()">Lisa</a>
 						</div>
 					</div>
@@ -95,6 +100,33 @@
 			</div>
 		</div>
 	</div>
+
+	${userParties.map(party => `
+	<!-- Party tab -->
+	<div id="${party.id}" class="col s12">
+		<div class="container">
+			<div class="row">
+				<h1>${party.partyName}</h1>
+			</div>
+			<div class="row">
+				<ul class="collection with-header">
+					<li class="collection-header">
+						<div>
+							<h4>Edetabel</h4>
+						</div>
+					</li>
+					${party.members.map(member => `
+					<li class="collection-item">
+						<div><span class="badge">${member.scoreTotal}</span>${member.name}</div>
+					</li>
+					`).join('')}
+				</ul>
+			</div>
+
+		</div>
+	</div>
+	`).join('')}
+
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -107,7 +139,7 @@
 		window.addEventListener('touchend', touchend, false);
 
 		partyList = await getPartyList();
-		await partyList.forEach(party => data[party] = null);
+		await partyList.forEach(party => data[party.partyName] = null);
 		M.Autocomplete.init(document.querySelectorAll('.autocomplete'), { data });
 	}
 

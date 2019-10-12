@@ -6,10 +6,7 @@ const { join } = require('path');
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser');
 const { errorHandler } = require('./middleware/errorHandler')
-const authRoute = require('./routes/auth');
-const scoresRoute = require('./routes/scores');
-const partiesRoute = require('./routes/parties');
-const mainRoute = require('./routes/main');
+const routes = require('./controllers/routes')
 const app = express();
 
 
@@ -37,10 +34,7 @@ app.use(bodyParser.json());
 app.use(express.static(join(__dirname, 'public')));
 
 /* Set up routes */
-app.use('/auth', authRoute);
-app.use('/scores', scoresRoute);
-app.use('/parties', partiesRoute);
-app.use('/', mainRoute);
+app.use('/', routes);
 app.use(errorHandler);
 
 /* Start application */
