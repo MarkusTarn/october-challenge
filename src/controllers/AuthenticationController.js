@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { User } = require('../models/UsersModel');
+const { User, getUser } = require('../models/UsersModel');
 const { ValidationError } = require('../middleware/errorHandler');
 const tokenOptions = { maxAge: 900000, httpOnly: true };
 
@@ -41,6 +41,18 @@ module.exports = class AuthenticationController {
 
         const token = await user.generateAuthToken();
         res.cookie('authorization', token, tokenOptions);
+        return res.status(200).json({ status: 200, message: 'success' });
+    }
+
+    static async recover(req, res, next) {
+        const { id, password } = req.query;
+
+        let user = await getUser(id);
+        if (!user) return next(new ValidationError(name, 'No such user'));
+
+        user.password = await bcrypt.hash(password, 10);
+        await user.save();
+
         return res.status(200).json({ status: 200, message: 'success' });
     }
 };

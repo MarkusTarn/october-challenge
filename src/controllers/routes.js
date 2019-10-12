@@ -15,6 +15,7 @@ router.get('/auth', AuthenticationController.renderLoginView);
 router.get('/auth/logout', AuthenticationController.logout);
 router.post('/auth/login', AuthenticationController.login);
 router.post('/auth/register', AuthenticationController.register);
+// router.get('/auth/recover', AuthenticationController.recover);
 
 /* Parties */
 router.get('/parties', auth, PartiesController.getAllParties);
