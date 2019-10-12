@@ -22,7 +22,8 @@
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.3",
-    "pm2": "^3.5.1"
+    "pm2": "^3.5.1",
+    "serve-favicon": "^2.5.0"
   },
   "devDependencies": {},
   "author": "Markus Tarn",

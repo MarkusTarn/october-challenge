@@ -5,6 +5,7 @@ const es6Renderer = require('express-es6-template-engine');
 const { join } = require('path');
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser');
+const favicon = require('serve-favicon')
 const { errorHandler } = require('./middleware/errorHandler')
 const routes = require('./controllers/routes')
 const app = express();
@@ -31,6 +32,7 @@ app.set('view engine', 'html');
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(favicon(join(__dirname, 'public', 'favicon.png')))
 app.use(express.static(join(__dirname, 'public')));
 
 /* Set up routes */
