@@ -22,6 +22,7 @@
 		<div class="nav-content">
 			<ul class="tabs tabs-transparent">
 				<li class="tab"><a class="active" href="#account">Sinu punktid</a></li>
+				<li class="tab"><a href="#info">Info</a></li>
 				${userParties.map(party => `<li class="tab"><a href="#${party.id}">${party.partyName}</a></li>
 				`).join('')}
 				<li class="tab"><a href="#addParty">Lisa tabel</a></li>
@@ -97,6 +98,111 @@
 							<a href="#!" class="waves-effect waves-green btn" onclick="addParty()">Lisa</a>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Add party page -->
+	<div id="info" class="col s12">
+		<div class="container">
+			<h4>Punktijaotus</h4>
+			<div class="row">
+				<div class="col s12">
+					<table class="responsive-table highlight">
+						<thead>
+						  <tr>
+							  <th>Nimetus</th>
+							  <th>Punktid</th>
+							  <th>Kommentaar</th>
+						  </tr>
+						</thead>
+				
+						<tbody>
+						  <tr>
+							<td>Beer</td>
+							<td>1</td>
+							<td>Või muu lahja alkohoolne jook</td>
+						  </tr>
+						  <tr>
+							<td>Wine</td>
+							<td>1</td>
+							<td>Pokaal</td>
+						  </tr>
+						  <tr>
+							<td>Coctail</td>
+							<td>1p</td>
+							<td>4cl kanget</td>
+						  </tr>
+						  <tr>
+							<td>Shot</td>
+							<td>1</td>
+							<td>4cl</td>
+						  </tr>
+						  <tr>
+							<td>Marijuana</td>
+							<td>1</td>
+							<td>Bong või 1/2 jointi</td>
+						  </tr>
+						  <tr>
+							<td>Shrooms</td>
+							<td>1</td>
+							<td>gramm</td>
+						  </tr>
+						  <tr>
+							<td>Acid</td>
+							<td>6</td>
+							<td>Plotter</td>
+						  </tr>
+						  <tr>
+							<td>MDMA</td>
+							<td>5</td>
+							<td>Õhtu kohta, min 100mg</td>
+						  </tr>
+						  <tr>
+							<td>DMT</td>
+							<td>4</td>
+							<td>Kui kohale jõuad</td>
+						  </tr>
+						  <tr>
+							<td>Cocaine</td>
+							<td>2</td>
+							<td>Triip</td>
+						  </tr>
+						  <tr>
+							<td>Ketamine</td>
+							<td>4</td>
+							<td>Key bump</td>
+						  </tr>
+						  <tr>
+							<td>Meth</td>
+							<td>10</td>
+							<td>Piip</td>
+						  </tr>
+						  <tr>
+							<td>Heroin</td>
+							<td>15</td>
+							<td>Lusikas</td>
+						  </tr>
+						  <tr>
+							<td>Crack</td>
+							<td>-50</td>
+							<td>Lapsed, ärge tehke cracki</td>
+						  </tr>
+						  <tr>
+							<td>Pills</td>
+							<td>3</td>
+							<td>Tableti kohta</td>
+						  </tr>
+						</tbody>
+					  </table>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12">
+					<div class="video-container">
+						<iframe width="853" height="480" src="//www.youtube.com/embed/AZUaEZSQJ9Y?rel=0" frameborder="0" allowfullscreen></iframe>
+					  </div>
 				</div>
 			</div>
 		</div>

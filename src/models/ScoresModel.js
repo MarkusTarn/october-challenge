@@ -8,7 +8,7 @@ const itemMap = {
 	Acid: 6,	   // per plotter
 	MDMA: 5,       // per night, min 100mg
 	DMT: 4,		   // if you get there
-	Cocaine: 4,    // per line
+	Cocaine: 2,    // per line
 	Ketamine: 4,   // per key bump
 	Meth: 10,      // per pipe
 	Heroin: 15,    // per spoon
