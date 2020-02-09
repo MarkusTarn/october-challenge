@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const { itemMap } = require('./ScoresModel');
 
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
-const mapper = (array) => array.map(score => itemMap[score.item] * score.quantity);
+const mapper = (array) => array.map(score => (new Date(Date.parse(score.timestamp)).getMonth() === new Date().getMonth()) ? itemMap[score.item] * score.quantity : 0);
 const scorePredicate = (a, b) => (b.scoreTotal > a.scoreTotal ? 1 : (b.scoreTotal > a.scoreTotal ? -1 : 0));
 
 const UserSchema = new mongoose.Schema({
