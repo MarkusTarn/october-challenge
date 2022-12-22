@@ -20,7 +20,7 @@
     "express": "^4.17.1",
     "express-es6-template-engine": "^2.1.9",
     "joi": "^14.3.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.7.3",
     "pm2": "^3.5.1",
     "serve-favicon": "^2.5.0"
